@@ -103,6 +103,5 @@ Para reproducir la fase RED: `git checkout 36542f2 && npm install && npm run tes
 └── cucumber.js · jest.config.js · eslint.config.mjs · tsconfig*.json
 ```
 
-## Próximos pasos
-
-Persistencia con Prisma + PostgreSQL (implementar las interfaces de `repositories/`), notificaciones al cliente al cambiar de estado y listados/filtros de órdenes por técnico y estado.
+## Persistencia con Prisma + PostgreSQL
+ (implementar las interfaces de `repositories/`), notificaciones al cliente al cambiar de estado y listados/filtros de órdenes por técnico y estado.
