@@ -4,7 +4,7 @@ Backend REST en **TypeScript (strict)** para un taller de servicio técnico: rec
 
 ## Stack
 
-Node.js ≥ 20 · TypeScript (strict) · Express 5 · JWT + bcrypt · Cucumber.js + ts-node · Jest · ESLint · GitHub Actions.
+Node.js ≥ 22 · TypeScript (strict) · Express 5 · JWT + bcrypt · Cucumber.js + ts-node · Jest · ESLint · GitHub Actions.
 Persistencia: **repositorios en memoria** (permitido por la consigna) detrás de interfaces, listos para cambiar por Prisma/PostgreSQL.
 
 ## Puesta en marcha
