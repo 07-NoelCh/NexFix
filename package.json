@@ -15,7 +15,8 @@
     "typecheck": "tsc --noEmit",
     "test:unit": "jest",
     "test:e2e": "cucumber-js",
-    "test": "npm run test:unit && npm run test:e2e"
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:coverage": "jest --coverage"
   },
   "license": "MIT",
   "dependencies": {
