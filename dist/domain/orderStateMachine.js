@@ -4,13 +4,14 @@ exports.ACTIVE_STATUSES = void 0;
 exports.assertTransition = assertTransition;
 const errors_1 = require("./errors");
 const TRANSITIONS = {
-    RECIBIDO: ['ASIGNADO'],
-    ASIGNADO: ['PRESUPUESTADO'],
-    PRESUPUESTADO: ['EN_REPARACION', 'RECHAZADO'],
+    RECIBIDO: ['ASIGNADO', 'CANCELADO'],
+    ASIGNADO: ['PRESUPUESTADO', 'CANCELADO'],
+    PRESUPUESTADO: ['EN_REPARACION', 'RECHAZADO', 'CANCELADO'],
     EN_REPARACION: ['LISTO'],
     LISTO: ['ENTREGADO'],
     ENTREGADO: [],
-    RECHAZADO: []
+    RECHAZADO: [],
+    CANCELADO: []
 };
 /** Estados en los que una orden cuenta como "trabajo activo" de un técnico. */
 exports.ACTIVE_STATUSES = ['ASIGNADO', 'PRESUPUESTADO', 'EN_REPARACION'];

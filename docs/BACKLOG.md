@@ -94,6 +94,14 @@ Criterios de aceptación:
 2. Un técnico solo ve sus propias órdenes.
 3. Un estado inexistente se rechaza (400).
 
+### HU-10 · Cancelar orden — `features/12_cancelar_orden.feature`
+**Como** recepcionista, **quiero** cancelar una orden antes de que empiece la reparación **para** liberar al técnico y cerrar pedidos que el cliente ya no quiere.
+
+Criterios de aceptación:
+1. Una orden `RECIBIDO`, `ASIGNADO` o `PRESUPUESTADO` puede cancelarse y pasa a `CANCELADO`, con el motivo registrado en el historial.
+2. Una orden en reparación, lista o cerrada no puede cancelarse (409).
+3. El motivo es obligatorio (400).
+4. Al cancelar una orden asignada, el técnico recupera cupo para recibir otra.
 ---
 
 ## Historias Técnicas / No Funcionales

@@ -111,6 +111,10 @@ function buildRouter(c) {
             amount: (0, parsers_1.reqNumber)(body, 'amount', { min: 0 })
         }));
     });
+    router.post('/orders/:id/cancel', auth, front, async (req, res) => {
+        const body = (0, parsers_1.asBody)(req.body);
+        res.json(await c.orderService.cancel(req.params.id, (0, parsers_1.reqString)(body, 'reason')));
+    });
     return router;
 }
 //# sourceMappingURL=routes.js.map

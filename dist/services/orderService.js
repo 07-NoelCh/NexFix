@@ -106,6 +106,14 @@ class OrderService {
         order.payment = { method: payment.method, amount: payment.amount, paidAt: new Date().toISOString() };
         return this.moveTo(order, 'ENTREGADO');
     }
+    /** HU-10 */
+    async cancel(orderId, reason) {
+        const order = await this.findOrFail(orderId);
+        (0, orderStateMachine_1.assertTransition)(order.status, 'CANCELADO');
+        order.status = 'CANCELADO';
+        order.history.push({ status: 'CANCELADO', at: new Date().toISOString(), note: reason });
+        return this.orders.save(order);
+    }
     /** HU-07 — consulta pública: devuelve una vista sin datos internos. */
     async track(code, documentId) {
         const order = await this.orders.findByCode(code);

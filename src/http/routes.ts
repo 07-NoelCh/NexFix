@@ -1,10 +1,11 @@
-import { Router } from 'express';
+import { Router, type Request } from 'express';
 import type { Container } from '../container';
 import { ORDER_STATUSES } from '../domain/types';
 import { asBody, optEnum, optString, reqBoolean, reqNumber, reqParts, reqPaymentMethod, reqRole, reqString } from './parsers';
 import { authenticate, currentUser, requireRole } from './middleware';
 
 /** Capa de enrutamiento: valida la forma de la entrada, delega en los servicios y arma la respuesta. No contiene reglas de negocio. */
+const idOf = (req: Request): string => req.params.id as string;
 export function buildRouter(c: Container): Router {
   const router = Router();
   const auth = authenticate(c.authService);
@@ -16,10 +17,10 @@ export function buildRouter(c: Container): Router {
     res.json({ status: 'ok', service: 'NexFix' });
   });
 
-  router.post('/auth/login', async (req, res) => {
-    const body = asBody(req.body);
-    res.json(await c.authService.login(reqString(body, 'username'), reqString(body, 'password')));
-  });
+  router.post('/auth/login', async function (req, res) {
+      const body = asBody(req.body);
+      res.json(await c.authService.login(reqString(body, 'username'), reqString(body, 'password')));
+    });
 
   router.get('/tracking', async (req, res) => {
     const query = asBody(req.query);
