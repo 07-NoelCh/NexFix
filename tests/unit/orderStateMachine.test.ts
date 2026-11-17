@@ -9,6 +9,19 @@ describe('orderStateMachine', () => {
     expect(() => assertTransition('LISTO', 'ENTREGADO')).not.toThrow();
   });
 
+  it('permite cancelar mientras la reparación no empezó', () => {
+    expect(() => assertTransition('RECIBIDO', 'CANCELADO')).not.toThrow();
+    expect(() => assertTransition('ASIGNADO', 'CANCELADO')).not.toThrow();
+    expect(() => assertTransition('PRESUPUESTADO', 'CANCELADO')).not.toThrow();
+  });
+
+  it('no permite cancelar una reparación en curso, terminada o ya cerrada', () => {
+    expect(() => assertTransition('EN_REPARACION', 'CANCELADO')).toThrow();
+    expect(() => assertTransition('LISTO', 'CANCELADO')).toThrow();
+    expect(() => assertTransition('ENTREGADO', 'CANCELADO')).toThrow();
+    expect(() => assertTransition('CANCELADO', 'ASIGNADO')).toThrow();
+  });
+ 
   it('rechaza saltos de estado y retrocesos', () => {
     expect(() => assertTransition('RECIBIDO', 'LISTO')).toThrow();
     expect(() => assertTransition('ENTREGADO', 'LISTO')).toThrow();

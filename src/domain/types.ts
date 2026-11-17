@@ -1,7 +1,7 @@
 export const ROLES = ['ADMIN', 'RECEPCIONISTA', 'TECNICO'] as const;
 export type Role = (typeof ROLES)[number];
 
-export const ORDER_STATUSES = ['RECIBIDO', 'ASIGNADO', 'PRESUPUESTADO', 'EN_REPARACION', 'LISTO', 'ENTREGADO', 'RECHAZADO'] as const;
+export const ORDER_STATUSES = ['RECIBIDO', 'ASIGNADO', 'PRESUPUESTADO', 'EN_REPARACION', 'LISTO', 'ENTREGADO', 'RECHAZADO', 'CANCELADO'] as const;
 export type OrderStatus = (typeof ORDER_STATUSES)[number];
 
 export const PAYMENT_METHODS = ['EFECTIVO', 'TARJETA', 'TRANSFERENCIA'] as const;
@@ -68,6 +68,7 @@ export interface Payment {
 export interface HistoryEntry {
   status: OrderStatus;
   at: string;
+  note?: string | undefined;
 }
 
 export interface RepairOrder {

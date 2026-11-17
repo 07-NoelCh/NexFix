@@ -180,3 +180,14 @@ When('el técnico {string} consulta el listado de órdenes', async function (thi
 Then('el listado contiene {int} orden(es)', function (this: NexFixWorld, count: number) {
   assert.equal(this.response.body.length, count);
 });
+
+// ---------- Cancelación (HU-10) ----------
+When('la recepción cancela la orden de {string} por el motivo {string}', async function (this: NexFixWorld, name: string, reason: string) {
+  await this.send('post', `/orders/${this.orderOf(name).id}/cancel`, { token: this.currentToken, body: { reason } });
+});
+
+Then('el historial registra la cancelación con el motivo {string}', function (this: NexFixWorld, reason: string) {
+  const last = this.response.body.history.at(-1);
+  assert.equal(last.status, 'CANCELADO');
+  assert.equal(last.note, reason);
+});

@@ -128,5 +128,10 @@ export function buildRouter(c: Container): Router {
     );
   });
 
+  router.post('/orders/:id/cancel', auth, front, async (req, res) => {
+    const body = asBody(req.body);
+    res.json(await c.orderService.cancel(req.params.id as string, reqString(body, 'reason')));
+  });
+
   return router;
 }

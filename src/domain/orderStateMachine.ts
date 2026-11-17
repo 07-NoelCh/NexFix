@@ -2,13 +2,14 @@ import { ConflictError } from './errors';
 import type { OrderStatus } from './types';
 
 const TRANSITIONS: Record<OrderStatus, readonly OrderStatus[]> = {
-  RECIBIDO: ['ASIGNADO'],
-  ASIGNADO: ['PRESUPUESTADO'],
-  PRESUPUESTADO: ['EN_REPARACION', 'RECHAZADO'],
+  RECIBIDO: ['ASIGNADO', 'CANCELADO'],
+  ASIGNADO: ['PRESUPUESTADO', 'CANCELADO'],
+  PRESUPUESTADO: ['EN_REPARACION', 'RECHAZADO', 'CANCELADO'],
   EN_REPARACION: ['LISTO'],
   LISTO: ['ENTREGADO'],
   ENTREGADO: [],
-  RECHAZADO: []
+  RECHAZADO: [],
+  CANCELADO: []
 };
 
 /** Estados en los que una orden cuenta como "trabajo activo" de un técnico. */

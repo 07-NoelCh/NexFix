@@ -5,6 +5,12 @@ import type { Role } from '../../src/domain/types';
 
 // ---------- HU-NF-01 Rendimiento ----------
 When('se registran {int} clientes consecutivos', async function (this: NexFixWorld, count: number) {
+  await this.send('post', '/customers', {
+    token: this.currentToken,
+    body: { fullName: 'Cliente de calentamiento', documentId: '39999999' }
+  });
+  assert.equal(this.response.status, 201);
+
   this.responseTimes.length = 0;
   for (let i = 0; i < count; i++) {
     await this.send('post', '/customers', {

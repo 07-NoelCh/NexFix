@@ -126,6 +126,15 @@ export class OrderService {
     return this.moveTo(order, 'ENTREGADO');
   }
 
+  /** HU-10 */
+  async cancel(orderId: string, reason: string): Promise<RepairOrder> {
+    const order = await this.findOrFail(orderId);
+    assertTransition(order.status, 'CANCELADO');
+    order.status = 'CANCELADO';
+    order.history.push({ status: 'CANCELADO', at: new Date().toISOString(), note: reason });
+    return this.orders.save(order);
+  }
+
   /** HU-07 — consulta pública: devuelve una vista sin datos internos. */
   async track(code: string, documentId: string): Promise<TrackingView> {
     const order = await this.orders.findByCode(code);
