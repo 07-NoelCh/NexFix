@@ -15,7 +15,7 @@ function buildRouter(c) {
     router.get('/health', (_req, res) => {
         res.json({ status: 'ok', service: 'NexFix' });
     });
-    router.post('/auth/login', async (req, res) => {
+    router.post('/auth/login', async function (req, res) {
         const body = (0, parsers_1.asBody)(req.body);
         res.json(await c.authService.login((0, parsers_1.reqString)(body, 'username'), (0, parsers_1.reqString)(body, 'password')));
     });
