@@ -122,6 +122,13 @@ Criterios:
 ### HU-NF-03 · Arquitectura en capas *(restricción, verificada por revisión de código)*
 **Como** equipo de desarrollo, **quiero** separar Controladores (`src/http`), Casos de uso (`src/services`) y Acceso a datos (`src/repositories`) **para** poder cambiar la persistencia (p. ej. Prisma/PostgreSQL) sin tocar la lógica de negocio.
 
+### HU-NF-04 · Documentación interactiva de la API — `features/13_documentacion_api.feature`
+**Como** desarrollador que consume la API, **quiero** una documentación OpenAPI con Swagger UI **para** conocer y probar los endpoints sin herramientas externas.
+
+Criterios de aceptación:
+1. `GET /api/docs.json` devuelve la especificación OpenAPI con los endpoints principales y el esquema `bearerAuth`.
+2. `GET /api/docs/` muestra la interfaz de Swagger UI.
+3. Una prueba unitaria falla si una ruta del router no está documentada.
 ---
 
 ## Trazabilidad
