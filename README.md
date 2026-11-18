@@ -105,6 +105,16 @@ Errores: `{ "error": { "code": "...", "message": "..." } }` con 400 / 401 / 403 
 
 El backlog completo (historias de usuario, criterios de aceptación y trazabilidad) está en [`docs/BACKLOG.md`](docs/BACKLOG.md).
 
+## Documentación interactiva (Swagger)
+
+Con la API en marcha, abrir `http://localhost:3000/api/docs` para ver y probar todos los endpoints.
+
+1. Ejecutar `POST /auth/login` con **Try it out** y copiar el `token`.
+2. Botón **Authorize** → pegar el token (sin la palabra `Bearer`).
+3. Probar los demás endpoints; los marcados con candado usan el token.
+
+La especificación en JSON está en `/api/docs.json` y se puede importar en Postman. Una prueba unitaria (`tests/unit/openapi.test.ts`) verifica que no haya rutas sin documentar.
+
 ## Cómo se aplicó XP
 
 - **BDD/TDD (RED → GREEN → REFACTOR).** Cada historia se escribió primero como archivo `.feature` con sus step definitions; sin código de producción, la suite falla (RED). Luego se implementa lo mínimo en `src/` hasta que pasa (GREEN) y se refactoriza con esa red de seguridad. La lógica pura (máquina de estados, cálculo de presupuesto) además tiene pruebas unitarias con Jest.
